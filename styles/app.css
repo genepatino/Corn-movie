@@ -102,6 +102,21 @@ button {
   cursor: pointer;
 }
 
+.button-up{
+  padding: 10px 20px 0px;
+}
+
+.up{
+  background-color: var(--purple-dark-1);
+  border: none;
+  color: var(--purple-light-2);
+  font-weight: var(--font-weight-text2);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
 
 /* Shared */
 .header-container, .trendingPreview-header, .categoriesPreview-container {
@@ -208,9 +223,14 @@ button {
 }
 
 .trendingPreview-btn {
-  border-radius: 8px;
-  height: 32px;
-  width: 72px;
+  background-color: var(--purple-dark-1);
+  border: none;
+  color: var(--purple-light-2);
+  font-weight: var(--font-weight-text2);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
 }
 
 .trendingPreview-movieList {

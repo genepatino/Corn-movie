@@ -11,6 +11,12 @@ const api = axios.create({
 
 // Utils
 
+buttonUp.addEventListener('click', goUp)
+
+function goUp(){
+  window.scrollTo( 0, 0 )
+}
+
 function createMovies(movies, container) {
   container.innerHTML = '';
 
