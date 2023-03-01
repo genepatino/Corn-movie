@@ -1,0 +1,19 @@
+{
+  "name": "corn-movie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genepatino/Corn-movie.git"
+  },
+  "author": "@genesisptn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/genepatino/Corn-movie/issues"
+  },
+  "homepage": "https://github.com/genepatino/Corn-movie#readme"
+}
