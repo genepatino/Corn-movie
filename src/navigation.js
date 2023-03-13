@@ -39,8 +39,7 @@ function navigator() {
 }
 
 function homePage() {
-  console.log('Home!!');
-
+  titlePage.classList.remove('inactive')
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.add('inactive');
@@ -76,6 +75,8 @@ function categoriesPage() {
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
 
+  titlePage.classList.add('inactive')
+
   // ['#category', 'id-name']
   const [_, categoryData] = location.hash.split('=');
   const [categoryId, categoryName] = categoryData.split('-');
@@ -86,10 +87,8 @@ function categoriesPage() {
 }
 
 function movieDetailsPage() {
-  console.log('Movie!!');
-
+  
   headerSection.classList.add('header-container--long');
-  // headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
   arrowBtn.classList.add('header-arrow--white');
   headerTitle.classList.add('inactive');
@@ -102,14 +101,14 @@ function movieDetailsPage() {
   genericSection.classList.add('inactive');
   movieDetailSection.classList.remove('inactive');
 
-  // ['#movie', '234567']
+  titlePage.classList.add('inactive')
+
   const [_, movieId] = location.hash.split('=');
   getMovieById(movieId);
 }
 
 function searchPage() {
-  console.log('Search!!');
-
+  
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
@@ -124,14 +123,14 @@ function searchPage() {
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
 
+  titlePage.classList.add('inactive')
+
   // ['#search', 'platzi']
   const [_, query] = location.hash.split('=');
   getMoviesBySearch(query);
 }
 
 function trendsPage() {
-  console.log('TRENDS!!');
-
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
@@ -145,6 +144,8 @@ function trendsPage() {
   categoriesPreviewSection.classList.add('inactive');
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
+
+  titlePage.classList.add('inactive')
 
   headerCategoryTitle.innerHTML = 'Tendencias';
 

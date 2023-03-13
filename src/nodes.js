@@ -28,3 +28,4 @@ const movieDetailDescription = document.querySelector('.movieDetail-description'
 const movieDetailScore = document.querySelector('.movieDetail-score');
 
 const buttonUp = document.querySelector('.up')
+const titlePage = document.querySelector('.title-page')
