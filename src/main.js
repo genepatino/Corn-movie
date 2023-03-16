@@ -9,12 +9,10 @@ const api = axios.create({
   },
 });
 
+//Utils
 
-/* buttonUp.addEventListener('click', goUp)
- */
-let lastMovieInterception
-let page = 1
-
+//let lastMovieInterception
+/* window.addEventListener('scroll', getPaginatedTrendingMovies) */
 let observador = new IntersectionObserver((entries)=>{
   entries.forEach((entry)=>{
     if(entry.isIntersecting){
@@ -25,22 +23,20 @@ let observador = new IntersectionObserver((entries)=>{
   })
 });
 
-let observadorMoreMovies = new IntersectionObserver((entries)=>{
-  entries.forEach((entrie)=>{
-    if(entrie.isIntersecting){
+//Infinity scroll con IntersectionObserver
+/* let observadorMoreMovies = new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+    if(entry.isIntersecting){
       page++
       getTrendingMovies()
     }
-
   })
 }, {
   rootMargin: '0px 0px 200px 0px',
   threshold: 1.0
-})
+}) */
 
-/* function goUp(){
-  window.scrollTo( 0, 0 )
-} */
+
 
 function skeletonLoadingMovies(){
   for (let index = 1; index < 7; index++) {
@@ -94,13 +90,14 @@ function createMovies(
     movieContainer.append(movieImg);
     container.appendChild(movieContainer);
   })
-  if(lastMovieInterception){
+  /* if(lastMovieInterception){
     observadorMoreMovies.unobserve(lastMovieInterception)
   }
   
   const listMovies = document.querySelectorAll('.movie-img')
   lastMovieInterception = listMovies[listMovies.length-1]
-  observadorMoreMovies.observe(lastMovieInterception)
+  observadorMoreMovies.observe(lastMovieInterception) */
+
  
 }
 
@@ -122,6 +119,7 @@ function createCategories(categories, container) {
     categoryContainer.appendChild(categoryTitle);
     container.appendChild(categoryContainer);
   });
+  
 }
 
 
@@ -149,7 +147,7 @@ async function getMoviesByCategory(id) {
     },
   });
   const movies = data.results;
-  createMovies(movies, genericSection, true);
+  createMovies(movies, genericSection, {lazyLoad:true, clean:true});
 }
 
 async function getMoviesBySearch(query) {
@@ -160,21 +158,41 @@ async function getMoviesBySearch(query) {
   });
   const movies = data.results;
 
-  createMovies(movies, genericSection, true);
+  createMovies(movies, genericSection, {lazyLoad:true, clean:false});
 }
 
 async function getTrendingMovies() {
+  /* const skeleton = document.querySelector('.skeleton-generic')
+  skeleton.style.display = 'none' */
   const { data } = await api('trending/movie/day', {
     params: {
       page
     }
   });
   const movies = data.results;
-  /* const skeletonGeneric = document.querySelector('.skeleton-generic')
-  skeletonGeneric.style.display = 'none' */
-  createMovies(movies, genericSection, {lazyLoad:true, clean:false});
+
+  createMovies(movies, genericSection, {lazyLoad:true, clean:true});
 }
 
+async function getPaginatedTrendingMovies(){
+  const {scrollTop, clientHeight, scrollHeight} = document.documentElement
+
+  const scrollIsBotton = (scrollTop + clientHeight) >= (scrollHeight - 20)
+  if(scrollIsBotton){
+    page++
+
+    /* const skeleton = document.querySelector('.skeleton-generic')
+    skeleton.style.display = 'none' */
+    const { data } = await api('trending/movie/day', {
+      params: {
+        page
+      }
+    });
+    const movies = data.results;
+  
+    createMovies(movies, genericSection, {lazyLoad:true, clean:false});
+  }
+}
 
 async function getMovieById(id) {
   const { data: movie } = await api('movie/' + id);
